@@ -1,0 +1,74 @@
+OWASP Top 10 (2025)		Open Web Application Security Project	
+#	Category	Meaning	Testing Impact
+1	Broken Access Control	
+  Description: Users can access data or features they shouldn't — IDOR, BOLA, privilege escalation.	
+  Test Scenarios to be covered:
+      Log in as User A; modify URL/ID to access User B's data — should get 403 Forbidden
+			Log in as regular user; try accessing admin endpoints — should fail
+			GET /api/users/123/orders — access another user's resource; verify rejection
+			Remove/modify auth headers, JWT tokens — verify API returns 401/403
+2	Security Misconfiguration	
+  Description: Default settings, unnecessary services, debug mode on prod — exposing the app.	
+  Test Scenarios to be covered:
+      Try admin/admin, root/root, default passwords — should all fail
+			Enumerate hidden directories and files
+			Look for .bak, .old, .config files left on servers
+			Check for X-Powered-By, Server headers revealing tech stack; disable them
+			Scan for common misconfigurations, open ports, unnecessary services
+3	Software Supply Chain Failures
+  Description: Vulnerable dependencies, compromised libraries, or malicious build/deployment systems.
+  Test Scenarios to be covered:
+      Document all dependencies
+			Scan for known vulnerabilities in npm, pip, Maven, Go, Rust packages (Snyk)
+			Scan Docker images for vulnerable layers and base images
+			Review package-lock.json, requirements.txt, pom.xml (Trivy)
+			Review Dockerfile, CI/CD pipelines (GitHub Actions, Jenkins, GitLab CI) for security
+4	Cryptographic Failures
+  Description: Weak encryption, hardcoded keys, exposed sensitive data, use of deprecated algorithms.
+  Test Scenarios to be covered:
+      Check HTTPS enabled, valid certificates
+			Verify use of AES-256, SHA-256+; flag MD5, DES, RC4
+			Ensure keys are NOT hardcoded, stored in environment variables or secret vaults
+			Scan code for hardcoded secrets, API keys, private keys (SAST)
+			Ensure passwords hashed
+5	Injection	
+  Description: Attacker-controlled input reaches code/database without sanitisation — SQL, NoSQL, OS commands.
+  Test Scenarios to be covered:
+      Input ' OR '1'='1 in login form; if bypassed, SQLi exists
+			Fuzz input fields with injection payloads (SQLi, XSS, command injection) - Burp Suite
+			Static analysis — flag potential injection vulnerabilities
+6	Insecure Design	
+  Description: Flawed threat model or missing security controls baked into architecture from the start.	
+  Test Scenarios to be covered:
+      Verify authentication, encryption, logging, access control are designed
+			Ensure use of security patterns (defense in depth, principle of least privilege, secure defaults)
+7	Authentication Failures
+  Description: Broken login logic — weak password reset, predictable tokens, session fixation, MFA bypass.
+  Test Scenarios to be covered:
+      Try 123456, password, qwerty — should fail
+			Try 20 login attempts with common passwords — account should lock
+			Verify rate limiting triggers after 5 failed attempts in 5 minutes
+			Keep same session ID before/after login — if ID doesn't change, vulnerable
+			Automate password policy tests — length, complexity, special chars, no dictionary words
+8	Software or Data Integrity Failures
+  Description: Insecure CI/CD, unsigned updates, unsafe deserialisation — malicious code execution.
+  Test Scenarios to be covered:
+      Check application binaries are signed with valid certificates
+			Review build steps in Jenkins, GitHub Actions — ensure no secret leakage, malicious steps
+			Scan Dockerfile, Kubernetes manifests, Terraform for integrity issues
+9	Security Logging & Alerting Failures
+  Description: Insufficient logs, missing alerts, or logs are not tamper-proof — breaches go undetected.
+  Test Scenarios to be covered:
+      Perform sensitive action (login, data access, config change); verify log entry created immediately
+			Centralised logging — search for specific events, build dashboards
+			Trigger errors/exceptions; verify PII not logged (passwords, tokens, card data masked)
+10	Mishandling of Exceptional Conditions
+    Description: Stack traces leaked, error messages reveal system info, uncaught exceptions cause crashes.	
+    Test Scenarios to be covered:
+      Trigger errors (404, 500, DB errors); verify stack traces NOT visible to users
+			Check response body in failed requests — no Java stack traces, SQL errors
+			Send invalid input (negative numbers, oversized strings); verify graceful error messages
+			Call API with bad JSON, missing required fields; verify structured errors (not raw exceptions)
+			Test API error responses — consistent format, no sensitive data
+			Trigger edge cases; verify app handles gracefully without crashing
+			Trigger exceptions; verify error details are logged securely, not exposed to UI
