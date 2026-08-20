@@ -1,0 +1,49 @@
+GDPR	General Data Protection Regulation		
+7 Principles			
+########################################
+1	Lawfulness, fairness & transparency	
+  Description: Collect data only with a valid legal basis and tell users exactly how it's used.
+  Test Areas:
+      Test that consent banners, privacy notices, and opt-in/opt-out flows work correctly
+			Verify consent is not pre-ticked; test that rejecting consent blocks non-essential trackers
+			Automate UI tests for consent modal appearance, accept/reject flows
+2	Purpose Limitation
+  Description: Use data only for the specific reason it was collected — nothing beyond that.
+  Test Areas:      
+      Test that data collected for Feature A is not accessible or used by Feature B
+			Trace data flow — check if registration email ends up in marketing lists without consent
+			Test API endpoints to ensure they don't expose data outside its stated purpose
+3	Data minimization
+  Description: Collect only what you truly need — no extras, no "just in case" data.
+  Test Areas:
+      Test that forms/APIs don't capture or store unnecessary personal fields
+			Review all input forms — flag optional fields that get stored as mandatory
+			Check API request/response payloads — flag unnecessary PII fields returned
+4	Accuracy
+  Description: Keep personal data correct, up-to-date, and fix errors promptly.
+  Test Areas:
+      Test update, correction, and sync flows for user data across systems
+			Edit profile data and verify it updates in all places (UI, emails, DB, third-party sync)
+			Automate update flows and assert DB/API reflects the change
+5	Storage limitation
+  Description: Don't hold personal data longer than necessary — delete it when done.
+  Test Areas:
+      Test data retention jobs, auto-deletion triggers, and expiry logic
+			Trigger account deletion — verify all PII is purged from DB, backups flagged, logs anonymized
+			Write SQL assertions to confirm deleted user data is fully removed or anonymized
+6	Security
+  Description: Protect data from unauthorized access, loss, or destruction.
+  Test Areas:
+      Security testing — encryption, access control, data masking, breach handling
+			Try accessing another user's data by manipulating IDs (IDOR testing)
+			Automated security scanning — injection, auth bypass, sensitive data exposure
+			Infrastructure-level vulnerability scanning
+			Verify data is encrypted in transit
+			Ensure secrets and keys are not hardcoded
+			Confirm PII is masked/redacted in application logs
+7	Accountability
+  Description: The organization must be able to prove it follows all the above rules.
+  Test Areas:
+      Test audit logs, consent records, and reporting/export features
+			Perform user actions and verify an accurate audit log entry is created
+			Validate that audit events are captured, searchable, and tamper-evident
