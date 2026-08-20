@@ -1,0 +1,32 @@
+# SAST
+Static Application Security Testing
+
+Sonarqube
+Cppcheck
+ESLint
+TSLint
+
+# DAST
+Dynamic Application Security Testing
+
+Burp Suite
+OWASP ZAP
+
+# IaC
+Infrastructure as Code
+
+Trivy
+(Container Images)
+
+# SCA
+Software Composition Analysis
+
+Trivy
+(JSON, YAML)
+
+# IPR
+Intellectual Property Rights
+
+FOSSA
+(SCA)
+
