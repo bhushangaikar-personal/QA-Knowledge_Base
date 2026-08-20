@@ -1,5 +1,5 @@
 OWASP Top 10 (2025)		Open Web Application Security Project	
-#	Category	Meaning	Testing Impact
+#############################################################
 1	Broken Access Control	
   Description: Users can access data or features they shouldn't — IDOR, BOLA, privilege escalation.	
   Test Scenarios to be covered:
