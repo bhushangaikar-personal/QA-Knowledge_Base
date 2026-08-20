@@ -1,0 +1,39 @@
+PCI-DSS	Payment Card Information - Data Security Standard		
+12 Requirements			
+###########################################################
+1	Install & Maintain Firewall Configuration
+  Description: Control network traffic with firewalls; no direct public access to payment systems.	
+  Test Areas: Network/infra testing — firewall rule validation, port scanning
+2	Do Not Use Vendor Defaults	
+  Description: Change all default passwords and remove unnecessary services; harden systems.
+  Test Areas: System hardening tests — verify no default creds, unnecessary services disabled
+3	Protect Stored Cardholder Data
+  Description: Encrypt or tokenize card data; never store full PANs, CVVs, or PINs.
+  Test Areas: Encryption/tokenization tests — PAN storage, data masking in DBs
+4	Encrypt Cardholder Data in Transit
+  Description: All data moving over networks must be encrypted (TLS/SSL minimum).
+  Test Areas: TLS/SSL validation — protocol enforcement, cipher strength, certificate checks
+5	Protect Systems Against Malware
+  Description: Deploy and maintain antivirus/anti-malware on all systems handling card data.
+  Test Areas: Security scanning — antivirus integration, malware signature tests
+6	Develop & Maintain Secure Systems & Applications
+  Description: Use secure coding practices, patch systems, and maintain secure development lifecycle.
+  Test Areas: Code review, SAST, DAST — injection, auth bypass, secure coding compliance
+7	Restrict Access by Business Need-to-Know	
+  Description: Implement role-based access control; limit access to cardholder data.
+  Test Areas: RBAC testing — role-based data visibility, permission boundary tests
+8	Identify & Authenticate Access
+  Description: Assign unique user IDs; enforce strong passwords; use MFA for remote access.
+  Test Areas: Login flow testing — password policy, MFA, session management
+9	Restrict Physical Access to Cardholder Data
+  Description: Secure servers, terminals, and storage; log and monitor all physical access.
+  Test Areas: Access control logs — badge/key card audit trails, camera recordings
+10	Track & Monitor Access to Network
+  Description: Enable logging on all systems; log all access to cardholder data; retain logs.
+  Test Areas: Log verification — event capture, integrity, retention, searchability
+11	Regularly Test Security Systems
+  Description: Perform vulnerability scans, penetration tests, and file integrity monitoring.
+  Test Areas: Vuln scanning, pen testing, file integrity — automated & manual
+12	Maintain Information Security Policy
+  Description: Document, communicate, and maintain security policies; manage third-party risk.
+  Test Areas: Documentation review, policy compliance tests, third-party vendor audits
